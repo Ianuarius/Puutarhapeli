@@ -27,3 +27,4 @@ Joona Kela
 Karl Sartorisio
 Tommi Heiskanen
 Aleksi Parkkila
+Jussi Mannermaa
