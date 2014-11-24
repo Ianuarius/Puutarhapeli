@@ -25,3 +25,4 @@ Tärkeintä on, että hommaan saa rutiinia. Postailkaa omia kokeilukuvia ja test
 Juha Keränen
 Joona Kela
 Karl Sartorisio
+Jussi Mannermaa
