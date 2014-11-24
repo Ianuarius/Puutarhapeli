@@ -22,9 +22,9 @@ Tärkeintä on, että hommaan saa rutiinia. Postailkaa omia kokeilukuvia ja test
 
 (HUOM: Lisätkää itse oma nimenne listaan, jos haluatte.)
 
-Juha Keränen
-Joona Kela
-Karl Sartorisio
-Tommi Heiskanen
-Aleksi Parkkila
-Jussi Mannermaa
+* Juha Keränen
+* Joona Kela
+* Karl Sartorisio
+* Tommi Heiskanen
+* Aleksi Parkkila
+* Jussi Mannermaa
