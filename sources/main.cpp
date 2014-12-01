@@ -6,14 +6,14 @@ and may not be redistributed without written permission.*/
 #include "SDL.h"
 #include "Window.h"
 
-int main( int argc, char* args[] )
+int main(int argc, char* args[])
 {
 	if (!SDL::init()) {
 		printf("SDL initialization failed!");
 		return -1;
 	}
 
-	Window window(800, 600, "Peli");
+	Window window(800, 600, "Puutarhapeli");
 	SDL_Event event;
 	bool quit = false;
 
@@ -33,8 +33,6 @@ int main( int argc, char* args[] )
 	}
 
 	SDL::exit();
-
-	return 0;
 
 	return 0;
 }
