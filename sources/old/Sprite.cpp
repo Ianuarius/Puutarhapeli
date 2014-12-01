@@ -57,7 +57,6 @@ void Sprite::setFramerate(int fps) {
 void Sprite::render(int xPos, int yPos, float tFrameTime)  {
 	currentFrameTime += tFrameTime;
 	
-
 	SDL_Rect* currentClip = &gSpriteClips[currentFrame];
 	gSpriteSheet.render(xPos, yPos, currentClip);
 
