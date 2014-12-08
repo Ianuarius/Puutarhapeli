@@ -58,7 +58,7 @@ void Window::resize(int width, int height, std::string title) {
 
 	// Nearest neighbour rendering
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "nearest");
-	SDL_RenderSetLogicalSize(this->renderer, width, height);
+	SDL_RenderSetLogicalSize(this->renderer, 256, 240);
 	
 
 	surface = SDL_GetWindowSurface(window);

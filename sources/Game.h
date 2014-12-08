@@ -13,7 +13,7 @@ class Game {
 		void drawScene();
 		void createNewPiece();
 
-		int pieceX, pieceY;
+		int pieceX, pieceY, rotation;
 
 	private:
 		void drawBoard();

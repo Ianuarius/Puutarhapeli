@@ -3,6 +3,9 @@
 Game::Game(Window* window, Board* board) {
 	this->mWindow = window;
 	this->mBoard = board;
+	pieceX = (BOARD_WIDTH / 2) - (PIECE_SIZE / 2);
+	pieceY = 0;
+	rotation = 0;
 
 	//TODO: Create initial piece
 	//TODO: Create next piece
@@ -11,7 +14,7 @@ Game::Game(Window* window, Board* board) {
 void Game::drawScene() {
 	// Draws board
 	drawBoard();
-	drawPiece(3, 2, 2);
+	drawPiece(pieceX, pieceY, rotation);
 }
 
 void Game::drawBoard() {
