@@ -1,4 +1,6 @@
 
+Nimi : Rage Against Bugs
+
 - määritetään missä virukset !
 
   - tarkistetaan onko shapea
