@@ -3,6 +3,8 @@
 
 #include "Window.h"
 #include "Board.h"
+#include "Piece.h"
+#include "Color.h"
 
 class Game {
 	public:
@@ -11,12 +13,15 @@ class Game {
 		void drawScene();
 		void createNewPiece();
 
+		int pieceX, pieceY;
+
 	private:
 		void drawBoard();
 		void drawPiece(int x, int y, int rotation);
 
 		Window* mWindow;
 		Board* mBoard;
+		Piece mPiece;
 };
 
 #endif //__GAME_H_DEFINED__

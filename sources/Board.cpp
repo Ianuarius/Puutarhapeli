@@ -15,3 +15,29 @@ void Board::init() {
 		}
 	}
 }
+
+int Board::getXPos(int position) {
+	return BOARD_X + (BLOCK_SIZE * position);
+}
+
+int Board::getYPos(int position) {
+	return BOARD_Y + (BLOCK_SIZE * position);
+}
+
+bool Board::isFreeBlock(int x, int y) {
+	if (board[x][y] == POS_FREE) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+bool Board::isGameOver() {
+	for (int x = 0; x < BOARD_WIDTH; x++) {
+		if (board[x][0] == POS_FILLED) {
+			return true;
+		}
+	}
+
+	return false;
+}

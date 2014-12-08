@@ -11,6 +11,8 @@
 #define BOARD_X 10			// Board X position in PIXELS
 #define BOARD_Y 10			// Board Y position in PIXELS
 
+#define PIECE_SIZE 2		
+
 class Board
 {
 	public:
@@ -37,4 +39,3 @@ class Board
 };
 
 #endif //__BOARD_H_DEFINED__ 
-// jannicca94@gmail.com

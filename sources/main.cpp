@@ -37,6 +37,8 @@ int main(int argc, char* args[])
 		// Clear screen
 		window.clear();
 
+		board.isGameOver();
+
 		game.drawScene();
 
 		// Refresh screen and cap framerate
