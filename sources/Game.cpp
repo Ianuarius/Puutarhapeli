@@ -3,11 +3,15 @@
 Game::Game(Window* window, Board* board) {
 	this->mWindow = window;
 	this->mBoard = board;
+
+	//TODO: Create initial piece
+	//TODO: Create next piece
 }
 
 void Game::drawScene() {
 	// Draws board
 	drawBoard();
+	// drawPiece();
 }
 
 void Game::drawBoard() {
@@ -21,4 +25,9 @@ void Game::drawBoard() {
 							  Color("red"));
 		}
 	}
+}
+
+void Game::createNewPiece() {
+	//TODO: Set next piece to current piece
+	//TODO: Create new next piece
 }

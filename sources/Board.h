@@ -16,8 +16,19 @@ class Board
 	public:
 		Board(Piece *pieces, Window *window);
 
+		int getXPos(int position);	// Returns 'cell' X location in PIXELS
+		int getYPos(int position);  // Returns 'cell' Y location in PIXELS
+
+		void storePiece(int x, int y, int rotation);
+		bool isFreeBlock(int x, int y);
+		bool isPossibleMovement(int x, int y, int rotation);
+		bool isGameOver();
+
+		void deletePossibleLines();
+
 	private:
 		void init();
+		void deleteLine(int y);
 
 		enum { POS_FREE, POS_FILLED };
 		int board[BOARD_HEIGHT][BOARD_WIDTH];
@@ -25,4 +36,5 @@ class Board
 		Window *mWindow;
 };
 
-#endif //__BOARD_H_DEFINED__
+#endif //__BOARD_H_DEFINED__ 
+// jannicca94@gmail.com

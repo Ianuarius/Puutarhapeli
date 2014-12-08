@@ -9,9 +9,11 @@ class Game {
 		Game(Window* window, Board* board);
 
 		void drawScene();
+		void createNewPiece();
 
 	private:
 		void drawBoard();
+		void drawPiece(int x, int y, int rotation);
 
 		Window* mWindow;
 		Board* mBoard;
