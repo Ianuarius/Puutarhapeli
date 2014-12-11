@@ -2,7 +2,6 @@
 
 Board::Board(Piece *pieces, Window *window) {
 	mPieces = pieces;
-
 	mWindow = window;
 
 	init();
@@ -25,17 +24,21 @@ int Board::getYPos(int position) {
 }
 
 bool Board::isFreeBlock(int x, int y) {
-	if (board[x][y] == POS_FREE) {
+	if (board[y][x] == POS_FREE) {
 		return true;
 	} else {
 		return false;
 	}
 }
 
+int Board::getPiece(int x, int y) {
+	return board[y][x];
+}
+
 bool Board::isGameOver() {
 	for (int x = 0; x < BOARD_WIDTH; x++) {
-		if (board[x][0] == POS_FILLED) {
-			return true;
+		if (board[1][x] != POS_FREE) {
+			return board[1][x];
 		}
 	}
 
@@ -56,12 +59,29 @@ bool Board::isPossibleMovement(int x, int y, int rotation) {
 				}
 			}
 
+			if (j1 >= 0) {
+				if (mPieces->getBlock(rotation, j2, i2) !=0 
+					&& !isFreeBlock(i1, j1)) {
+						return false;
+				}
+			}
+
 		}
 	}
 
-	//if (x > 0 && x < BOARD_WIDTH && y > BOARD_HEIGHT) {
-	//	return false;
-	//}
-
 	return true;
+}
+
+void Board::storePiece(int x, int y, int rotation) {
+	for (int i1 = x, i2 = 0; i1 < x + PIECE_SIZE; i1++, i2++) {
+		for (int j1 = y, j2 = 0; j1 < y + PIECE_SIZE; j1++, j2++) {
+			if (mPieces->getBlock(rotation, j2, i2) != 0) {
+				board[j1][i1] = mPieces->getBlock(rotation, j2, i2);
+			}
+		}
+	}
+}
+
+void Board::deletePossibleLines() {
+
 }

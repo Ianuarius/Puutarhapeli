@@ -22,6 +22,8 @@ class Game {
 		Window* mWindow;
 		Board* mBoard;
 		Piece mPiece;
+
+		int nextPieceX, nextPieceY;
 };
 
 #endif //__GAME_H_DEFINED__

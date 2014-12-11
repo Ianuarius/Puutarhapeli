@@ -25,6 +25,7 @@ class Board
 		bool isFreeBlock(int x, int y);
 		bool isPossibleMovement(int x, int y, int rotation);
 		bool isGameOver();
+		int  getPiece(int x, int y);
 
 		void deletePossibleLines();
 

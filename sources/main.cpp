@@ -32,7 +32,7 @@ int main(int argc, char* args[])
 
 	while(!quit) {
 		int x = 0;
-		int rotation = 0;
+		int rotation = game.rotation;
 		int waitTicks = 1000;
 
 		while(SDL_PollEvent(&event) != 0) {
@@ -49,11 +49,11 @@ int main(int argc, char* args[])
 						break;
 
 					case SDLK_DOWN:
-						waitTicks = 100;
+						waitTicks = 50;
 						break;
 
 					case SDLK_SPACE:
-						game.rotation = (game.rotation + 1) % 4;
+						rotation = (rotation + 1) % 4;
 						break;
 
 					default:
@@ -62,14 +62,22 @@ int main(int argc, char* args[])
 			}
 		}
 
-		if (board.isPossibleMovement(game.pieceX + x, game.pieceY, game.rotation)) {
+		if (board.isPossibleMovement(game.pieceX + x, game.pieceY, rotation)) {
 			game.pieceX += x;
+			game.rotation = rotation;
 		}
-
 
 		if (gameTimer.getTicks() > waitTicks) {
 			if (board.isPossibleMovement(game.pieceX, game.pieceY+1, game.rotation)) {
 				game.pieceY++;
+			} else {
+				board.storePiece(game.pieceX, game.pieceY, game.rotation);
+
+				if (board.isGameOver()) {
+					exit(0);
+				}
+
+				game.createNewPiece();
 			}
 			
 			gameTimer.start();
@@ -77,8 +85,6 @@ int main(int argc, char* args[])
 
 		// Clear screen
 		window.clear();
-
-		board.isGameOver();
 
 		game.drawScene();
 
