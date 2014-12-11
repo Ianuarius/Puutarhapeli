@@ -12,6 +12,7 @@
 #define BOARD_Y 10			// Board Y position in PIXELS
 
 #define PIECE_SIZE 2		
+#define BLOCK_COUNT 3
 
 class Board
 {
@@ -25,13 +26,13 @@ class Board
 		bool isFreeBlock(int x, int y);
 		bool isPossibleMovement(int x, int y, int rotation);
 		bool isGameOver();
-		int  getPiece(int x, int y);
+		int  getBlock(int x, int y);
 
 		void deletePossibleLines();
 
 	private:
 		void init();
-		void deleteLine(int y);
+		void deleteVertical(int x, int y);
 
 		enum { POS_FREE, POS_FILLED };
 		int board[BOARD_HEIGHT][BOARD_WIDTH];

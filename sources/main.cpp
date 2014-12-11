@@ -33,7 +33,7 @@ int main(int argc, char* args[])
 	while(!quit) {
 		int x = 0;
 		int rotation = game.rotation;
-		int waitTicks = 1000;
+		Uint32 waitTicks = 1000;
 
 		while(SDL_PollEvent(&event) != 0) {
 			if (event.type == SDL_QUIT) {
@@ -49,7 +49,7 @@ int main(int argc, char* args[])
 						break;
 
 					case SDLK_DOWN:
-						waitTicks = 50;
+						waitTicks = 5;
 						break;
 
 					case SDLK_SPACE:
@@ -76,6 +76,8 @@ int main(int argc, char* args[])
 				if (board.isGameOver()) {
 					exit(0);
 				}
+
+				board.deletePossibleLines();
 
 				game.createNewPiece();
 			}

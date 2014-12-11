@@ -31,7 +31,7 @@ void Game::drawBoard() {
 
 	for (int i = 0; i < BOARD_HEIGHT; i++) {
 		for (int j = 0; j < BOARD_WIDTH; j++) {
-				switch(mBoard->getPiece(j, i)) {
+				switch(mBoard->getBlock(j, i)) {
 				case 1:
 					drawColor = Color("green");
 					break;

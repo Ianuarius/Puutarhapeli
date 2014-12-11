@@ -31,14 +31,14 @@ bool Board::isFreeBlock(int x, int y) {
 	}
 }
 
-int Board::getPiece(int x, int y) {
+int Board::getBlock(int x, int y) {
 	return board[y][x];
 }
 
 bool Board::isGameOver() {
 	for (int x = 0; x < BOARD_WIDTH; x++) {
 		if (board[1][x] != POS_FREE) {
-			return board[1][x];
+			return true;
 		}
 	}
 
@@ -83,5 +83,39 @@ void Board::storePiece(int x, int y, int rotation) {
 }
 
 void Board::deletePossibleLines() {
+	int piece = POS_FREE;
+ 	int count = 0;
 
+    for (int y = 0; y < BOARD_HEIGHT; y++) {
+		for (int x = 0; x < BOARD_WIDTH; x++) {
+			int currentBlock = getBlock(x, y);
+
+			if (currentBlock != POS_FREE) {
+				if (currentBlock == piece) {
+					count++;
+				} else {
+					piece = currentBlock;
+					count = 1;
+				}
+
+				if (count > BLOCK_COUNT) {
+					deleteVertical(x, y);
+				}
+
+			} else {
+				piece = POS_FREE;
+				count = 0;
+			}
+		}
+    }
+}
+
+void Board::deleteVertical(int x, int y) {
+	int i = 0;
+	int piece = getBlock(x, y);
+
+	while (getBlock(x + i, y) == piece) {
+		board[y][x + i] = POS_FREE;
+		i--;
+	}
 }
