@@ -1,7 +1,6 @@
 #include "Board.h"
 
-Board::Board(Piece *pieces, Window *window) {
-	mPieces = pieces;
+Board::Board(Window *window) {
 	mWindow = window;
 
 	init();
@@ -54,13 +53,13 @@ bool Board::isPossibleMovement(int x, int y, int rotation) {
 				i1 > BOARD_WIDTH  - 1	||
 				j1 > BOARD_HEIGHT - 1)
 			{
-				if (mPieces->getBlock(rotation, j2, i2) != 0) { 
-					return false;
+				if (currentPiece->getBlock(rotation, j2, i2) != 0) { 
+ 					return false;
 				}
 			}
 
 			if (j1 >= 0) {
-				if (mPieces->getBlock(rotation, j2, i2) !=0 
+				if (currentPiece->getBlock(rotation, j2, i2) !=0 
 					&& !isFreeBlock(i1, j1)) {
 						return false;
 				}
@@ -72,11 +71,15 @@ bool Board::isPossibleMovement(int x, int y, int rotation) {
 	return true;
 }
 
-void Board::storePiece(int x, int y, int rotation) {
+void Board::storePiece() {
+	int x = currentPiece->x;
+	int y = currentPiece->y;
+	int rotation = currentPiece->rotation;
+
 	for (int i1 = x, i2 = 0; i1 < x + PIECE_SIZE; i1++, i2++) {
 		for (int j1 = y, j2 = 0; j1 < y + PIECE_SIZE; j1++, j2++) {
-			if (mPieces->getBlock(rotation, j2, i2) != 0) {
-				board[j1][i1] = mPieces->getBlock(rotation, j2, i2);
+			if (currentPiece->getBlock(rotation, j2, i2) != 0) {
+				board[j1][i1] = currentPiece->getBlock(rotation, j2, i2);
 			}
 		}
 	}
@@ -118,4 +121,8 @@ void Board::deleteVertical(int x, int y) {
 		board[y][x + i] = POS_FREE;
 		i--;
 	}
+}
+
+void Board::setCurrentPiece(Piece* piece) {
+	currentPiece = piece;
 }

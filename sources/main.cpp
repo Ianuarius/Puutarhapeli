@@ -28,18 +28,20 @@ int main(int argc, char* args[])
 	gameTimer.start();
 
 	// Game related
-	Piece piece;
-	Board board(&piece, &window);
+	Board board(&window);
 	Game game(&window, &board);
+	Piece* currentPiece = game.getCurrentPiece();
+	board.setCurrentPiece(currentPiece);
 
 	// Pate!
 	Texture pate;
 	window.loadTexture(&pate, "pate-framet.png");
-	Sprite throwAnimation(&window, &pate, pate.getWidth()/4, pate.getHeight(), 4, 8);
+	Sprite throwAnimation(&window, &pate, pate.getWidth()/3, pate.getHeight(), 3, 6);
 
 	while(!quit) {
+		Piece* currentPiece = game.getCurrentPiece();
+		int rotation = currentPiece->rotation;
 		int x = 0;
-		int rotation = game.rotation;
 		Uint32 waitTicks = 1000;
 
 		while(SDL_PollEvent(&event) != 0) {
@@ -69,16 +71,16 @@ int main(int argc, char* args[])
 			}
 		}
 
-		if (board.isPossibleMovement(game.pieceX + x, game.pieceY, rotation)) {
-			game.pieceX += x;
-			game.rotation = rotation;
+		if (board.isPossibleMovement(currentPiece->x + x, currentPiece->y, rotation)) {
+			currentPiece->x += x;
+			currentPiece->rotation = rotation;
 		}
 
 		if (gameTimer.getTicks() > waitTicks) {
-			if (board.isPossibleMovement(game.pieceX, game.pieceY+1, game.rotation)) {
-				game.pieceY++;
+			if (board.isPossibleMovement(currentPiece->x, currentPiece->y+1, currentPiece->rotation)) {
+				currentPiece->y++;
 			} else {
-				board.storePiece(game.pieceX, game.pieceY, game.rotation);
+				board.storePiece();
 
 				if (board.isGameOver()) {
 					exit(0);
@@ -89,6 +91,7 @@ int main(int argc, char* args[])
 				throwAnimation.play(false, 1);
 
 				game.createNewPiece();
+				board.setCurrentPiece(game.getCurrentPiece());
 			}
 			
 			gameTimer.start();

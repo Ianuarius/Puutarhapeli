@@ -17,12 +17,13 @@
 class Board
 {
 	public:
-		Board(Piece *pieces, Window *window);
+		Board(Window *window);
 
 		int getXPos(int position);	// Returns 'cell' X location in PIXELS
 		int getYPos(int position);  // Returns 'cell' Y location in PIXELS
 
-		void storePiece(int x, int y, int rotation);
+		void setCurrentPiece(Piece* piece);
+		void storePiece();
 		bool isFreeBlock(int x, int y);
 		bool isPossibleMovement(int x, int y, int rotation);
 		bool isGameOver();
@@ -36,7 +37,7 @@ class Board
 
 		enum { POS_FREE, POS_FILLED };
 		int board[BOARD_HEIGHT][BOARD_WIDTH];
-		Piece *mPieces;
+		Piece *currentPiece;
 		Window *mWindow;
 };
 

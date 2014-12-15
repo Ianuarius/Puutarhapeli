@@ -6,6 +6,7 @@
 #include "Piece.h"
 #include "Color.h"
 #include "Texture.h"
+#include <time.h>
 
 class Game {
 	public:
@@ -13,21 +14,20 @@ class Game {
 
 		void drawScene();
 		void createNewPiece();
-
-		int pieceX, pieceY, rotation;
+		Piece* getCurrentPiece();
 
 	private:
 		void drawBoard();
-		void drawPiece(int x, int y, int rotation);
+		void drawPiece(Piece *piece);
+
+		int randomNumber();
 
 		Window* mWindow;
 		Board* mBoard;
-		Piece mPiece;
+		Piece currentPiece, nextPiece;
 
 		Texture background;
 		SDL_Rect backgroundRect;
-
-		int nextPieceX, nextPieceY;
 };
 
 #endif //__GAME_H_DEFINED__

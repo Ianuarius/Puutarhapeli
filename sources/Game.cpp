@@ -1,6 +1,9 @@
 #include "Game.h"
 
 Game::Game(Window* window, Board* board) {
+	// Seed random
+	srand(time(0));
+
 	this->mWindow = window;
 	this->mBoard = board;
 
@@ -13,13 +16,16 @@ Game::Game(Window* window, Board* board) {
 	backgroundRect.y = 0;
 
 	//Create initial piece
-	pieceX = (BOARD_WIDTH / 2) - (PIECE_SIZE / 2);
-	pieceY = 0;
-	rotation = 0;
+	currentPiece = Piece(randomNumber(), randomNumber());
+	currentPiece.x = (BOARD_WIDTH / 2) - (PIECE_SIZE / 2);
+	currentPiece.y = 0;
+	currentPiece.rotation = 0;
 
-	//TODO: Create next piece
-	nextPieceX = BOARD_WIDTH + 5;
-	nextPieceY = 0;
+	//Create next piece
+	nextPiece = Piece(randomNumber(), randomNumber());
+	nextPiece.x = BOARD_WIDTH + 5;
+	nextPiece.y = 0;
+	nextPiece.rotation = 0;
 }
 
 void Game::drawScene() {
@@ -29,10 +35,10 @@ void Game::drawScene() {
 	drawBoard();
 
 	// Draws current piece
-	drawPiece(pieceX, pieceY, rotation);
+	drawPiece(&currentPiece);
 
 	// Draws next piece
-	drawPiece(nextPieceX, nextPieceY, 0);
+	drawPiece(&nextPiece);
 }
 
 void Game::drawBoard() {
@@ -41,12 +47,20 @@ void Game::drawBoard() {
 	for (int i = 0; i < BOARD_HEIGHT; i++) {
 		for (int j = 0; j < BOARD_WIDTH; j++) {
 				switch(mBoard->getBlock(j, i)) {
-				case 1:
+				case 1: 
 					drawColor = Color("green");
 					break;
 
 				case 2:
 					drawColor = Color("blue");
+					break;
+
+				case 3: 
+					drawColor = Color("yellow");
+					break;
+
+				case 4:
+					drawColor = Color("magenta");
 					break;
 
 				default:
@@ -65,15 +79,23 @@ void Game::drawBoard() {
 
 void Game::createNewPiece() {
 	//Set next piece to current piece
-	pieceX = (BOARD_WIDTH / 2) - (PIECE_SIZE / 2);
-	pieceY = 0;
-	rotation = 0;
+	currentPiece = nextPiece;
+	currentPiece.x = (BOARD_WIDTH / 2) - (PIECE_SIZE / 2);
+	currentPiece.y = 0;
+	currentPiece.rotation = 0;
 
-	//TODO: Create new next piece
+	//Create new next piece
+	nextPiece = Piece(randomNumber(), randomNumber());
+	nextPiece.x = BOARD_WIDTH + 5;
+	nextPiece.y = 0;
 }
 
-void Game::drawPiece(int x, int y, int rotation) {
+void Game::drawPiece(Piece *piece) {
 	Color drawColor;
+
+	int x = piece->x;
+	int y = piece->y;
+	int rotation = piece->rotation;
 
 	int xPos = mBoard->getXPos(x);
 	int yPos = mBoard->getYPos(y);
@@ -81,7 +103,7 @@ void Game::drawPiece(int x, int y, int rotation) {
 	for (int i = 0; i < PIECE_SIZE; i++) {
 		for(int j = 0; j < PIECE_SIZE; j++) {
 
-			switch(mPiece.getBlock(rotation, i, j)) {
+			switch(piece->getBlock(rotation, i, j)) {
 			case 1: 
 				drawColor = Color("green");
 				break;
@@ -90,15 +112,31 @@ void Game::drawPiece(int x, int y, int rotation) {
 				drawColor = Color("blue");
 				break;
 
+			case 3: 
+				drawColor = Color("yellow");
+				break;
+
+			case 4:
+				drawColor = Color("magenta");
+				break;
+
 			default:
 				drawColor = Color("white");
 				break;
 			}
 
-			if (mPiece.getBlock(rotation, i, j) != 0) {
+			if (piece->getBlock(rotation, i, j) != 0) {
 				mWindow->drawRect(xPos + (BLOCK_SIZE * j), yPos + (BLOCK_SIZE * i),
 								  BLOCK_SIZE, BLOCK_SIZE, drawColor);
 			}
 		}
 	}
+}
+
+Piece* Game::getCurrentPiece() {
+	return &currentPiece;
+}
+
+int Game::randomNumber() {
+	return rand() % 4 + 1;
 }
