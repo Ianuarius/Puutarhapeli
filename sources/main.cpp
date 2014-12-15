@@ -9,6 +9,8 @@ and may not be redistributed without written permission.*/
 #include "Board.h"
 #include "Game.h"
 #include "Timer.h"
+#include "Texture.h"
+#include "Sprite.h"
 
 int main(int argc, char* args[])
 {
@@ -29,6 +31,11 @@ int main(int argc, char* args[])
 	Piece piece;
 	Board board(&piece, &window);
 	Game game(&window, &board);
+
+	// Pate!
+	Texture pate;
+	window.loadTexture(&pate, "pate-framet.png");
+	Sprite throwAnimation(&window, &pate, pate.getWidth()/4, pate.getHeight(), 4, 8);
 
 	while(!quit) {
 		int x = 0;
@@ -79,6 +86,8 @@ int main(int argc, char* args[])
 
 				board.deletePossibleLines();
 
+				throwAnimation.play(false, 1);
+
 				game.createNewPiece();
 			}
 			
@@ -89,6 +98,8 @@ int main(int argc, char* args[])
 		window.clear();
 
 		game.drawScene();
+
+		throwAnimation.render(150, 10);
 
 		// Refresh screen and cap framerate
 		window.refresh();
