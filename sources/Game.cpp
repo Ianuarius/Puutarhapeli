@@ -4,6 +4,13 @@ Game::Game(Window* window, Board* board) {
 	this->mWindow = window;
 	this->mBoard = board;
 
+	// Taustakuva
+	background.setRenderer(mWindow->renderer);
+	background.loadFromFile("tausta1.png");
+	backgroundRect.w = 256;
+	backgroundRect.h = 240;
+	backgroundRect.x = 0;
+	backgroundRect.y = 0;
 
 	//Create initial piece
 	pieceX = (BOARD_WIDTH / 2) - (PIECE_SIZE / 2);
@@ -16,6 +23,8 @@ Game::Game(Window* window, Board* board) {
 }
 
 void Game::drawScene() {
+	mWindow->render(&background, &backgroundRect, 0, 0);
+
 	// Draws board
 	drawBoard();
 

@@ -134,3 +134,13 @@ void Window::drawRect(int X, int Y, int W, int H, Color color) {
 	SDL_SetRenderDrawColor(renderer, color.r(), color.g(), color.b(), color.a());
 	SDL_RenderFillRect(renderer, &fillRect );
 }
+
+void Window::loadTexture(Texture *sourceTexture, std::string path) {
+	sourceTexture->setRenderer(renderer);
+	sourceTexture->loadFromFile(path);
+}
+
+void Window::render(Texture *sourceTexture, SDL_Rect *destRect, int x, int y) {
+	sourceTexture->setRenderer(renderer);
+	sourceTexture->render(x, y, destRect, 0, NULL, SDL_FLIP_NONE);
+}

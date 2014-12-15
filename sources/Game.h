@@ -5,6 +5,7 @@
 #include "Board.h"
 #include "Piece.h"
 #include "Color.h"
+#include "Texture.h"
 
 class Game {
 	public:
@@ -22,6 +23,9 @@ class Game {
 		Window* mWindow;
 		Board* mBoard;
 		Piece mPiece;
+
+		Texture background;
+		SDL_Rect backgroundRect;
 
 		int nextPieceX, nextPieceY;
 };

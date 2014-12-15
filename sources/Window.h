@@ -5,6 +5,7 @@
 #include "SDL.h"
 #include "Timer.h"
 #include "Color.h"
+#include "Texture.h"
 
 class Window {
 	public:
@@ -56,6 +57,12 @@ class Window {
 
 		// Temp
 		void drawRect(int X, int Y, int W, int H, Color color);
+
+		// Loads texture from file
+		void loadTexture(Texture *sourceTexture, std::string path);
+
+		// Texture rendering
+		void render(Texture *sourceTexture, SDL_Rect *destRect, int x, int y);
 
 	private:
 		// Window caption
