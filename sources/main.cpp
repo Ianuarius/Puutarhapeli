@@ -11,6 +11,7 @@ and may not be redistributed without written permission.*/
 #include "Timer.h"
 #include "Texture.h"
 #include "Sprite.h"
+#include "Color.h"
 
 int main(int argc, char* args[])
 {
@@ -30,14 +31,22 @@ int main(int argc, char* args[])
 	Timer gameTimer;
 	gameTimer.start();
 
+	// Fonts
+	Texture levelText, levelTextShadow;
+	SDL_Color white = {255, 255, 255};
+	SDL_Color black = {0, 0, 0};
+
+	levelText.setRenderer(window.renderer);
+	levelTextShadow.setRenderer(window.renderer);
+
 	// Game related
 	Board board(&window);
 	Game game(&window, &board);
 	Piece* currentPiece = game.getCurrentPiece();
 	board.setCurrentPiece(currentPiece);
 
-	int virusCount = 2;
-	int level = 2;
+	int virusCount = 10;
+	int level = 10;
 
 	// Pate!
 	Texture pate;
@@ -51,6 +60,9 @@ int main(int argc, char* args[])
 		int rotation = currentPiece->rotation;
 		int x = 0;
 		Uint32 waitTicks = 750;
+
+		levelText.printText("Level 1", 18, white);
+		levelTextShadow.printText("Level 1", 18, black);
 
 		while(SDL_PollEvent(&event) != 0) {
 			if (event.type == SDL_QUIT) {
@@ -121,6 +133,10 @@ int main(int argc, char* args[])
 
 		game.drawScene();
 
+		// Print level text
+		levelTextShadow.render(66, 41);
+		levelText.render(65, 40);
+		
 		throwAnimation.render(222, 81);
 
 		// Refresh screen and cap framerate

@@ -60,13 +60,20 @@ bool Texture::loadFromFile(std::string path)
 }
 
 #ifdef _SDL_TTF_H
-bool Texture::loadFromRenderedText(std::string textureText, SDL_Color textColor)
+bool Texture::printText(std::string textureText, int fontSize, SDL_Color color)
 {
 	//Get rid of preexisting texture
 	free();
+	
+	TTF_Font *primaryFont = TTF_OpenFont("PressStart2P.ttf", fontSize);
+	
+	if (primaryFont == NULL) {
+		printf( "Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError() );
+		return -1;
+	}
 
 	//Render text surface
-	SDL_Surface* textSurface = TTF_RenderText_Solid(gFont, textureText.c_str(), textColor);
+	SDL_Surface* textSurface = TTF_RenderText_Solid(primaryFont, textureText.c_str(), color);
 	if (textSurface != NULL)
 	{
 		//Create texture from surface pixels

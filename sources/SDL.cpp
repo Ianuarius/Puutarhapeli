@@ -1,5 +1,4 @@
 #include "SDL.h"
-#include "SDL_ttf.h"
 
 bool SDL::init() {
 	bool success = true;
@@ -22,5 +21,7 @@ bool SDL::init() {
 }
 
 void SDL::exit() {
+	TTF_Quit();
+	IMG_Quit();
 	SDL_Quit();
 }
