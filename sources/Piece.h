@@ -6,12 +6,13 @@
 class Piece {
 	public:
 		Piece();
-		Piece(int a, int b);
+		Piece(int a, int b, bool virus);
 
 		int getBlock(int rotation, int x, int y);
 
 		char cPiece[4 /* Rotation */][2 /* Vertical */][2 /* Horizontal */];
 		int x, y, rotation;
+		bool virus;
 
 	private:
 		int a, b;

@@ -89,8 +89,8 @@ void Board::deletePossibleLines() {
 	int piece = POS_FREE;
  	int count = 0;
 
-    for (int y = 0; y < BOARD_HEIGHT; y++) {
-		for (int x = 0; x < BOARD_WIDTH; x++) {
+	for (int x = 0; x < BOARD_WIDTH; x++) {
+		for (int y = 0; y < BOARD_HEIGHT; y++) {
 			int currentBlock = getBlock(x, y);
 
 			if (currentBlock != POS_FREE) {
@@ -111,14 +111,47 @@ void Board::deletePossibleLines() {
 			}
 		}
     }
+
+    for (int y = 0; y < BOARD_HEIGHT; y++) {
+		for (int x = 0; x < BOARD_WIDTH; x++) {
+			int currentBlock = getBlock(x, y);
+
+			if (currentBlock != POS_FREE) {
+				if (currentBlock == piece) {
+					count++;
+				} else {
+					piece = currentBlock;
+					count = 1;
+				}
+
+				if (count > BLOCK_COUNT) {
+					deleteHorizontal(x, y);
+				}
+
+			} else {
+				piece = POS_FREE;
+				count = 0;
+			}
+		}
+    }
+}
+
+void Board::deleteHorizontal(int x, int y) {
+	int i = 0;
+	int piece = getBlock(x, y);
+
+	while (getBlock(x + i, y) == piece) {
+		board[y][x + i] = POS_FREE;
+		i--;
+	}
 }
 
 void Board::deleteVertical(int x, int y) {
 	int i = 0;
 	int piece = getBlock(x, y);
 
-	while (getBlock(x + i, y) == piece) {
-		board[y][x + i] = POS_FREE;
+	while (getBlock(x, y + i) == piece) {
+		board[y + i][x] = POS_FREE;
 		i--;
 	}
 }

@@ -6,14 +6,16 @@ Piece::Piece() {
 	x = 0;
 	y = 0;
 	rotation = 0;
+	virus = false;
 }
 
-Piece::Piece(int blockA, int blockB) {
+Piece::Piece(int blockA, int blockB, bool virus) {
 	a = blockA;
 	b = blockB;
 	x = 0;
 	y = 0;
 	rotation = 0;
+	this->virus = virus;
 
 	char piece[4 /* Rotation */][2 /* Vertical */][2 /* Horizontal */] = {
 		{ 
