@@ -94,7 +94,7 @@ void Board::deletePossibleLines() {
 			int currentBlock = getBlock(x, y);
 
 			if (currentBlock != POS_FREE) {
-				if (currentBlock == piece) {
+				if (currentBlock == piece || currentBlock == piece*2) {
 					count++;
 				} else {
 					piece = currentBlock;
@@ -117,7 +117,7 @@ void Board::deletePossibleLines() {
 			int currentBlock = getBlock(x, y);
 
 			if (currentBlock != POS_FREE) {
-				if (currentBlock == piece) {
+				if (currentBlock == piece || currentBlock == piece*2) {
 					count++;
 				} else {
 					piece = currentBlock;
@@ -140,9 +140,24 @@ void Board::deleteHorizontal(int x, int y) {
 	int i = 0;
 	int piece = getBlock(x, y);
 
-	while (getBlock(x + i, y) == piece) {
-		board[y][x + i] = POS_FREE;
-		i--;
+	while (true) {
+		int currentBlock = getBlock(x + i, y);
+		int mathBlock = 0;
+		
+		if (currentBlock == 1 ||
+			currentBlock == 4 ||
+			currentBlock == 16) {
+				mathBlock = currentBlock * 2;
+		} else {
+			mathBlock = currentBlock / 2;
+		}
+
+		if (currentBlock == piece || mathBlock == piece) {
+			board[y][x + i] = POS_FREE;
+			i--;
+		} else {
+			break;
+		}
 	}
 }
 
@@ -150,9 +165,24 @@ void Board::deleteVertical(int x, int y) {
 	int i = 0;
 	int piece = getBlock(x, y);
 
-	while (getBlock(x, y + i) == piece) {
-		board[y + i][x] = POS_FREE;
-		i--;
+	while (true) {
+		int currentBlock = getBlock(x, y + i);
+		int mathBlock = 0;
+		
+		if (currentBlock == 1 ||
+			currentBlock == 4 ||
+			currentBlock == 16) {
+				mathBlock = currentBlock * 2;
+		} else {
+			mathBlock = currentBlock / 2;
+		}
+
+		if (currentBlock == piece || mathBlock == piece) {
+			board[y + i][x] = POS_FREE;
+			i--;
+		} else {
+			break;
+		}
 	}
 }
 

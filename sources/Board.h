@@ -3,13 +3,14 @@
 
 #include "Window.h"
 #include "Piece.h"
+#include "Texture.h"
 
 #define BLOCK_SIZE 8		// Block WIDTH and HEIGHT in pixels!
 
 #define BOARD_WIDTH 12		// Board WIDTH in BLOCKS!
 #define BOARD_HEIGHT 20		// Board HEIGHT in BLOCKS!
-#define BOARD_X 10			// Board X position in PIXELS
-#define BOARD_Y 10			// Board Y position in PIXELS
+#define BOARD_X ((256 - (BOARD_WIDTH * BLOCK_SIZE)) / 2)	// Board X position in PIXELS
+#define BOARD_Y ((240 - (BOARD_HEIGHT * BLOCK_SIZE)))		// Board Y position in PIXELS
 
 #define PIECE_SIZE 2		
 #define BLOCK_COUNT 3
@@ -28,13 +29,14 @@ class Board
 		bool isPossibleMovement(int x, int y, int rotation);
 		bool isGameOver();
 		int  getBlock(int x, int y);
+		void init();
 
 		void deletePossibleLines();
 
 		int board[BOARD_HEIGHT][BOARD_WIDTH];
 
 	private:
-		void init();
+		
 		void deleteHorizontal(int x, int y);
 		void deleteVertical(int x, int y);
 

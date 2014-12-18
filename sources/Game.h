@@ -16,7 +16,10 @@ class Game {
 		void drawScene();
 		void createNewPiece();
 		void spawnVirus(int count, int level);
+		bool virusExists();
 		Piece* getCurrentPiece();
+
+		static const char blocks[6];
 
 	private:
 		void drawBoard();
@@ -31,7 +34,8 @@ class Game {
 		Texture background;
 		SDL_Rect backgroundRect;
 
-		
+		Texture pot;
+		SDL_Rect potRect;
 };
 
 #endif //__GAME_H_DEFINED__
