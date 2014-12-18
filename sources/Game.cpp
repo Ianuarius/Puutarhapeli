@@ -1,9 +1,12 @@
 #include "Game.h"
 
+const char Game::blocks[6] = {1, 4, 16, 2, 8, 32};
+
 Game::Game(Window* window, Board* board) {
+
 	// Seed random
 	srand(time(0));
-
+	
 	this->mWindow = window;
 	this->mBoard = board;
 
@@ -15,21 +18,33 @@ Game::Game(Window* window, Board* board) {
 	backgroundRect.x = 0;
 	backgroundRect.y = 0;
 
+	// Ruukku
+	pot.setRenderer(mWindow->renderer);
+	pot.loadFromFile("ruukku2222.png");
+	potRect.w = 164;
+	potRect.h = 166;
+	potRect.x = 0;
+	potRect.y = 0;
+
 	//Create initial piece
-	currentPiece = Piece(randomNumber(1,3), randomNumber(1,3), false);
+	currentPiece = Piece(blocks[randomNumber(1,3)], blocks[randomNumber(1,3)], false);
 	currentPiece.x = (BOARD_WIDTH / 2) - (PIECE_SIZE / 2);
 	currentPiece.y = 0;
 	currentPiece.rotation = 0;
 
 	//Create next piece
-	nextPiece = Piece(randomNumber(1,3), randomNumber(1,3), false);
+	nextPiece = Piece(blocks[randomNumber(1,3)], blocks[randomNumber(1,3)], false);
 	nextPiece.x = BOARD_WIDTH + 5;
 	nextPiece.y = 0;
 	nextPiece.rotation = 0;
 }
 
 void Game::drawScene() {
+	// Draw background
 	mWindow->render(&background, &backgroundRect, 0, 0);
+
+	// Draw the pot
+	mWindow->render(&pot, &potRect, (BOARD_X / 2 + BLOCK_SIZE), BOARD_Y);
 
 	// Draws board
 	drawBoard();
@@ -56,19 +71,19 @@ void Game::drawBoard() {
 					deadBlock.loadFromFile("Siemen_Blue_Dead.png");
 					break;
 
-				case 9: 
+				case 16: 
 					deadBlock.loadFromFile("Siemen_Yellow_Dead.png");
 					break;
 
-				case 16:
+				case 2:
 					deadBlock.loadFromFile("virusgreen.png");
 					break;
 
-				case 25:
+				case 8:
 					deadBlock.loadFromFile("virusblue.png");
 					break;
 
-				case 36:
+				case 32:
 					deadBlock.loadFromFile("virusyellow.png");
 					break;
 
@@ -94,7 +109,7 @@ void Game::createNewPiece() {
 	currentPiece.rotation = 0;
 
 	//Create new next piece
-	nextPiece = Piece(randomNumber(1, 3), randomNumber(1, 3), false);
+	nextPiece = Piece(blocks[randomNumber(0,3)], blocks[randomNumber(0,3)], false);
 	nextPiece.x = BOARD_WIDTH + 5;
 	nextPiece.y = 0;
 }
@@ -122,19 +137,19 @@ void Game::drawPiece(Piece *piece) {
 				siemenTekstuuri.loadFromFile("Siemen_Blue_h.png");
 				break;
 
-			case 9: 
+			case 16: 
 				siemenTekstuuri.loadFromFile("Siemen_Yellow_h.png");
 				break;
 
-			case 16:
+			case 2:
 				siemenTekstuuri.loadFromFile("virusgreen.png");
 				break;
 
-			case 25:
+			case 8:
 				siemenTekstuuri.loadFromFile("virusblue.png");
 				break;
 
-			case 36:
+			case 32:
 				siemenTekstuuri.loadFromFile("virusyellow.png");
 				break;
 
@@ -160,8 +175,23 @@ void Game::spawnVirus(int count, int level) {
 		int x = randomNumber(0, BOARD_WIDTH);
 		int y = randomNumber(maxLevel, BOARD_HEIGHT);
 
-		mBoard->board[y][x] = randomNumber(4, 6);
+		mBoard->board[y][x] = blocks[randomNumber(3,6)];
 	}
+}
+
+bool Game::virusExists() {
+	for (int i = 0; i < BOARD_HEIGHT; i++) {
+		for (int j = 0; j < BOARD_WIDTH; j++) {
+			if( mBoard->getBlock(j, i) == 2 ||
+				mBoard->getBlock(j, i) == 8 ||
+				mBoard->getBlock(j, i) == 32)
+			{
+				return true;
+			}
+		}
+	}
+
+	return false;
 }
 
 Piece* Game::getCurrentPiece() {

@@ -1,4 +1,5 @@
 #include "SDL.h"
+#include "SDL_ttf.h"
 
 bool SDL::init() {
 	bool success = true;
@@ -12,6 +13,10 @@ bool SDL::init() {
 	/*
 	Initialize AUDIO and TFF
 	*/
+	if (TTF_Init() == -1) {
+		printf("SDL TTF could not initialize! SDL Error: %s\n", SDL_GetError());
+		success = false;
+	}
 
 	return success;
 }

@@ -48,7 +48,7 @@ void Window::destroy() {
 void Window::resize(int width, int height, std::string title) {
 	destroy();
 
-	SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_SHOWN,
+	SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_FULLSCREEN_DESKTOP,
 								&window, &renderer);
 
 	if (!window || !renderer) {
@@ -96,7 +96,7 @@ void Window::refresh()
 }
 
 void Window::clear() {
-	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+	SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
 	SDL_RenderClear(renderer);
 }
 
