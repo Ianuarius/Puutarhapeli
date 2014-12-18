@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 
 /*
 	High-level wrapper for SDL2 calls.

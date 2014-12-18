@@ -4,6 +4,7 @@
 #include <string>
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 
 class Texture
 {
@@ -19,7 +20,7 @@ public:
 
 #ifdef _SDL_TTF_H
 	//Creates image from font string
-	bool loadFromRenderedText(std::string textureText, SDL_Color textColor);
+	bool printText(std::string textureText, int fontSize, SDL_Color color);
 #endif
 
 	//Deallocates texture
