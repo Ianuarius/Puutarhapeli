@@ -48,7 +48,7 @@ void Window::destroy() {
 void Window::resize(int width, int height, std::string title) {
 	destroy();
 
-	SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_FULLSCREEN_DESKTOP,
+	SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_SHOWN,
 								&window, &renderer);
 
 	if (!window || !renderer) {

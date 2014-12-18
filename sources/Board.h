@@ -4,6 +4,7 @@
 #include "Window.h"
 #include "Piece.h"
 #include "Texture.h"
+#include "Sprite.h"
 
 #define BLOCK_SIZE 8		// Block WIDTH and HEIGHT in pixels!
 
@@ -30,6 +31,7 @@ class Board
 		bool isGameOver();
 		int  getBlock(int x, int y);
 		void init();
+		void renderExplosion(int x, int y);
 
 		void deletePossibleLines();
 
