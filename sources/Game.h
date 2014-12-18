@@ -11,7 +11,6 @@
 
 class Game {
 	public:
-		const int b[2];
 		Game(Window* window, Board* board);
 
 		void drawScene();

@@ -1,8 +1,6 @@
 #include "Game.h"
 
-Game::Game(Window* window, Board* board):
-	b({2,3})
-{
+Game::Game(Window* window, Board* board) {
 	// Seed random
 	srand(time(0));
 
