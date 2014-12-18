@@ -31,12 +31,15 @@ class Board
 
 		void deletePossibleLines();
 
+		int board[BOARD_HEIGHT][BOARD_WIDTH];
+
 	private:
 		void init();
+		void deleteHorizontal(int x, int y);
 		void deleteVertical(int x, int y);
 
 		enum { POS_FREE, POS_FILLED };
-		int board[BOARD_HEIGHT][BOARD_WIDTH];
+		
 		Piece *currentPiece;
 		Window *mWindow;
 };

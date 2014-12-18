@@ -38,6 +38,8 @@ int main(int argc, char* args[])
 	window.loadTexture(&pate, "pate-framet.png");
 	Sprite throwAnimation(&window, &pate, pate.getWidth()/3, pate.getHeight(), 3, 6);
 
+	game.spawnVirus(5, 4);
+
 	while(!quit) {
 		Piece* currentPiece = game.getCurrentPiece();
 		int rotation = currentPiece->rotation;

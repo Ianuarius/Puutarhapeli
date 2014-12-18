@@ -7,20 +7,23 @@
 #include "Color.h"
 #include "Texture.h"
 #include <time.h>
+#include <math.h>
 
 class Game {
 	public:
+		const int b[2];
 		Game(Window* window, Board* board);
 
 		void drawScene();
 		void createNewPiece();
+		void spawnVirus(int count, int level);
 		Piece* getCurrentPiece();
 
 	private:
 		void drawBoard();
 		void drawPiece(Piece *piece);
 
-		int randomNumber();
+		int randomNumber(int min, int max);
 
 		Window* mWindow;
 		Board* mBoard;
@@ -28,6 +31,8 @@ class Game {
 
 		Texture background;
 		SDL_Rect backgroundRect;
+
+		
 };
 
 #endif //__GAME_H_DEFINED__
