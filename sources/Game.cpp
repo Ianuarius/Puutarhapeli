@@ -5,14 +5,14 @@ const char Game::blocks[6] = {1, 4, 16, 2, 8, 32};
 Game::Game(Window* window, Board* board) {
 
 	// Seed random
-	srand(time(0));
+	srand(time(NULL));
 	
 	this->mWindow = window;
 	this->mBoard = board;
 
 	// Taustakuva
 	background.setRenderer(mWindow->renderer);
-	background.loadFromFile("tausta1.png");
+	background.loadFromFile("tausta.png");
 	backgroundRect.w = 256;
 	backgroundRect.h = 240;
 	backgroundRect.x = 0;

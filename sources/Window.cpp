@@ -48,7 +48,7 @@ void Window::destroy() {
 void Window::resize(int width, int height, std::string title) {
 	destroy();
 
-	SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_SHOWN,
+	SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_FULLSCREEN_DESKTOP,
 								&window, &renderer);
 
 	if (!window || !renderer) {
@@ -106,7 +106,7 @@ bool Window::toggleFullscreen() {
 }
 
 int Window::getFramerate() {
-	int framerate = frameCount / (framerateTimer.getTicks() / 1000.f);
+	int framerate = frameCount / (framerateTimer.getTicks() / 1000);
 
 	if (framerate > 2000000) {
 		return 0;
@@ -115,7 +115,7 @@ int Window::getFramerate() {
 	return framerate;
 }
 
-void Window::capFramerate(int framerate) {
+void Window::capFramerate(Uint32 framerate) {
 	Uint32 ticks = frameTicks.getTicks();
 
 	if (ticks < (1000 / framerate)) {
@@ -135,9 +135,39 @@ void Window::drawRect(int X, int Y, int W, int H, Color color) {
 	SDL_RenderFillRect(renderer, &fillRect );
 }
 
-void Window::loadTexture(Texture *sourceTexture, std::string path) {
-	sourceTexture->setRenderer(renderer);
-	sourceTexture->loadFromFile(path);
+Texture* Window::loadTexture(std::string path) {
+	//sourceTexture->setRenderer(renderer);
+	//sourceTexture->loadFromFile(path);
+	
+	// The final texture
+	SDL_Texture *newTexture = NULL;
+	Texture *finalTexture;
+
+	// Load image at specified path
+	SDL_Surface *loadedSurface = IMG_Load(path.c_str());
+
+	if (!loadedSurface) {
+		printf("Unable to load image %s! SDL_image error: %s\n", path.c_str(), IMG_GetError());
+	} else {
+		// Color key image
+		SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0xFF, 0, 0xFF));
+
+		// Create texture from surface pixels
+		newTexture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
+
+		if (!newTexture) {
+			printf("Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
+		} else {
+			finalTexture->mWidth = loadedSurface->w;
+			finalTexture->mHeight = loadedSurface->h;
+		}
+
+		SDL_FreeSurface(loadedSurface);
+	}
+
+	finalTexture->mTexture = newTexture;
+
+	return finalTexture;
 }
 
 void Window::render(Texture *sourceTexture, SDL_Rect *destRect, int x, int y) {

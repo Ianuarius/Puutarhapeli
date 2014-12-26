@@ -45,16 +45,18 @@ public:
 	int getWidth();
 	int getHeight();
 
-private:
-	//The actual hardware texture
-	SDL_Texture* mTexture;
-	
-	// Renderer
-	SDL_Renderer* gRenderer;
-
 	//Image dimensions
 	int mWidth;
 	int mHeight;
+
+	//The actual hardware texture
+	SDL_Texture* mTexture;
+
+private:
+
+	
+	// Renderer
+	SDL_Renderer* gRenderer;
 };
 
 #endif // __LTEXTURE_H_INCLUDED__

@@ -3,6 +3,7 @@
 
 #include <stdint.h> // uint8_t
 #include <string>
+#include <SDL.h>
 
 /// General, platform-independent way to represent RGBA colors.
 ///
@@ -64,6 +65,9 @@ public:
 
 	/// Inverts whole color or individial components.
 	void invert(bool R=true, bool G=true, bool B=true);
+
+	/// Return SDL_Color type
+	SDL_Color getSDLColor();
 
 private:
 	uint8_t red;   ///< Red component (0 is none, 255 is full).
