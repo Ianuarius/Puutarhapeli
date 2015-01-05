@@ -14,10 +14,6 @@ Texture::~Texture()
 	free();
 }
 
-void Texture::setRenderer(SDL_Renderer* gRndr) {
-	gRenderer = gRndr;
-}
-
 bool Texture::loadFromFile(std::string path)
 {
 	//Get rid of preexisting texture
@@ -69,7 +65,7 @@ bool Texture::printText(std::string textureText, int fontSize, SDL_Color color)
 	
 	if (primaryFont == NULL) {
 		printf( "Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError() );
-		return -1;
+		return false;
 	}
 
 	//Render text surface

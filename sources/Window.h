@@ -59,7 +59,7 @@ class Window {
 		void drawRect(int X, int Y, int W, int H, Color color);
 
 		// Loads texture from file
-		void loadTexture(Texture *sourceTexture, std::string path);
+		Texture *loadTexture(std::string path);
 
 		// Texture rendering
 		void render(Texture *sourceTexture, SDL_Rect *destRect, int x, int y);

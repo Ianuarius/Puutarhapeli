@@ -48,18 +48,16 @@ int main(int argc, char* args[])
 	int virusCount = 10;
 	int level = 10;
 
-	// SPLOSOON
-	Texture explo;
-	window.loadTexture(&explo, "explosion3.png");
-	
-	Sprite explosionAnim(&window, &explo, explo.getWidth()/5, explo.getHeight(), 5, 6);
-	explosionAnim.play(0, 1);
-
-
 	// Pate!
+<<<<<<< HEAD
 	Texture pate;
 	window.loadTexture(&pate, "pate-framet2.png");
 	Sprite throwAnimation(&window, &pate, pate.getWidth()/3, pate.getHeight(), 3, 6);
+=======
+	Texture *pate;
+	pate = window.loadTexture("pate-framet.png");
+	Sprite throwAnimation(&window, pate, pate->getWidth()/3, pate->getHeight(), 3, 6);
+>>>>>>> origin/master
 
 	game.spawnVirus(virusCount, level);
 
@@ -144,8 +142,11 @@ int main(int argc, char* args[])
 		// Print level text
 		levelTextShadow.render(66, 41);
 		levelText.render(65, 40);
+<<<<<<< HEAD
 
 		//explosionAnim.render(100, 100);
+=======
+>>>>>>> origin/master
 		
 		throwAnimation.render(222, 81);
 

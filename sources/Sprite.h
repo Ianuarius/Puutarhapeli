@@ -48,8 +48,8 @@ class Sprite {
 
 		std::vector<SDL_Rect> gSpriteClips;
 
-		int frameCount, currentFrame, width, height;
-		float currentFrameTime, frameRate;
+		int frameRate, frameCount, currentFrame, width, height;
+		float currentFrameTime;
 
 		bool infinitePlay;
 		int animCount;

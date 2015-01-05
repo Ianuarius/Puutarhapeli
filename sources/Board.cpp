@@ -154,7 +154,7 @@ void Board::deleteHorizontal(int x, int y) {
 
 		if (currentBlock == piece || mathBlock == piece) {
 			board[y][x + i] = POS_FREE;
-			renderExplosion(x+i, y);
+			//renderExplosion(x+i, y);
 			i--;
 		} else {
 			break;
@@ -180,7 +180,7 @@ void Board::deleteVertical(int x, int y) {
 
 		if (currentBlock == piece || mathBlock == piece) {
 			board[y + i][x] = POS_FREE;
-			renderExplosion(x, y+i);
+			//renderExplosion(x, y+i);
 			i--;
 		} else {
 			break;
@@ -188,15 +188,15 @@ void Board::deleteVertical(int x, int y) {
 	}
 }
 
-void Board::renderExplosion(int x, int y) {
-	Texture explo;
-	mWindow->loadTexture(&explo, "explosion3.png");
-	
-	Sprite explosionAnim(mWindow, &explo, explo.getWidth()/6, explo.getHeight(), 6, 6);
-	explosionAnim.play(0, 1);
-
-	explosionAnim.render(x, y);
-}
+//void Board::renderExplosion(int x, int y) {
+//	Texture explo;
+//	mWindow->loadTexture(&explo, "explosion3.png");
+//	
+//	Sprite explosionAnim(mWindow, &explo, explo.getWidth()/6, explo.getHeight(), 6, 6);
+//	explosionAnim.play(0, 1);
+//
+//	explosionAnim.render(x, y);
+//}
 
 void Board::setCurrentPiece(Piece* piece) {
 	currentPiece = piece;
