@@ -41,7 +41,7 @@ class Window {
 		int getFramerate();
 
 		// Caps 
-		void capFramerate(int framerate);
+		void capFramerate(Uint32 framerate);
 
 		// Returns how many milliseconds have passed since the last frame and the current
 		int getDelta();

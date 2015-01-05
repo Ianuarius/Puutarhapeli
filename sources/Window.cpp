@@ -106,7 +106,7 @@ bool Window::toggleFullscreen() {
 }
 
 int Window::getFramerate() {
-	int framerate = frameCount / (framerateTimer.getTicks() / 1000.f);
+	int framerate = frameCount / (framerateTimer.getTicks() / 1000);
 
 	if (framerate > 2000000) {
 		return 0;
@@ -115,7 +115,7 @@ int Window::getFramerate() {
 	return framerate;
 }
 
-void Window::capFramerate(int framerate) {
+void Window::capFramerate(Uint32 framerate) {
 	Uint32 ticks = frameTicks.getTicks();
 
 	if (ticks < (1000 / framerate)) {

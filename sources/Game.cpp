@@ -5,14 +5,14 @@ const char Game::blocks[6] = {1, 4, 16, 2, 8, 32};
 Game::Game(Window* window, Board* board) {
 
 	// Seed random
-	srand(time(0));
+	srand((unsigned int)time(0));
 	
 	this->mWindow = window;
 	this->mBoard = board;
 
 	// Taustakuva
 	background.setRenderer(mWindow->renderer);
-	background.loadFromFile("tausta1.png");
+	background.loadFromFile("taustfra.png");
 	backgroundRect.w = 256;
 	backgroundRect.h = 240;
 	backgroundRect.x = 0;
@@ -76,15 +76,15 @@ void Game::drawBoard() {
 					break;
 
 				case 2:
-					deadBlock.loadFromFile("virusgreen.png");
+					deadBlock.loadFromFile("minivihrea.png");
 					break;
 
 				case 8:
-					deadBlock.loadFromFile("virusblue.png");
+					deadBlock.loadFromFile("minisini.png");
 					break;
 
 				case 32:
-					deadBlock.loadFromFile("virusyellow.png");
+					deadBlock.loadFromFile("minikeltainen.png");
 					break;
 
 				default:
@@ -142,15 +142,15 @@ void Game::drawPiece(Piece *piece) {
 				break;
 
 			case 2:
-				siemenTekstuuri.loadFromFile("virusgreen.png");
+				siemenTekstuuri.loadFromFile("minivihrea.png");
 				break;
 
 			case 8:
-				siemenTekstuuri.loadFromFile("virusblue.png");
+				siemenTekstuuri.loadFromFile("minisini.png");
 				break;
 
 			case 32:
-				siemenTekstuuri.loadFromFile("virusyellow.png");
+				siemenTekstuuri.loadFromFile("minikeltainen.png");
 				break;
 
 			default:
