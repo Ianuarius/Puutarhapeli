@@ -17,7 +17,6 @@ class Text {
 		Texture texture;
 		Font *mFont;
 		Color *mColor;
-
 };
 
 #endif __TEXT_H_DEFINED__

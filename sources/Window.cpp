@@ -141,7 +141,7 @@ Texture* Window::loadTexture(std::string path) {
 	
 	// The final texture
 	SDL_Texture *newTexture = NULL;
-	Texture *finalTexture;
+	Texture *finalTexture = NULL;
 
 	// Load image at specified path
 	SDL_Surface *loadedSurface = IMG_Load(path.c_str());

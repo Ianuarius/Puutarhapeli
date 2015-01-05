@@ -5,7 +5,7 @@ const char Game::blocks[6] = {1, 4, 16, 2, 8, 32};
 Game::Game(Window* window, Board* board) {
 
 	// Seed random
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 	
 	this->mWindow = window;
 	this->mBoard = board;
